@@ -11,9 +11,10 @@ module.exports = (sequelize) => {
         type: DataTypes.UUID,
         allowNull: true,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
-      dificulty: {
-        type: DataTypes.INTEGER,
+      difficulty: {
+        type: DataTypes.ENUM(['1', '2', '3', '4', '5']),
         allowNull: true,
       },
       duration: {
