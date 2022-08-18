@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Cards from "../Card/Card";
+import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll, filterCountriesByContinent, orderByName, orderByPopulation } from "../../actions";
-
+import { Container } from "./Home";
 
 export default function Home() {
 
@@ -49,13 +49,13 @@ export default function Home() {
 
     return(
         <div>   
-            <div>
+            <Container>
                 {
                     currentCountries && currentCountries.map(c => 
-                        <Cards id={c.id} image={c.image} name={c.name} continent={c.continent}/>
+                        <Card id={c.id} image={c.image} name={c.name} continent={c.continent}/>
                     )
                 }
-            </div>
+            </Container>
             <div>
                 {/* Filter by Name */}
                 <select onClick={(e) => handleSortName(e)}>

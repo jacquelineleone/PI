@@ -1,9 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { Link, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { getById } from "../../actions";
 import Activity from "./Activity";
+import { 
+    GlassCard, 
+    Titulo,
+    Texto,
+    Flag, 
+    Contenedor,
+    ButtonVolver
+} from './CountryDetail.js'
 
 export default function CountryDetail() {
 
@@ -13,30 +21,31 @@ export default function CountryDetail() {
 
     useEffect(() => {
         dispatch(getById(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
     const country = useSelector((state) => state.detail)
 
     return(
         <div>
             {country ? (
-                <div>
-                    <div>
-                        <img src={country.image}/>
-                        <h1>{country.name}</h1>
-                        <h2>ID: {country.id}</h2>
-                        <h2>Capital: {country.capital}</h2>
-                        <h2>Subregion: {country.subregion}</h2>
-                        <h2>Continent: {country.continent}</h2>
-                        <h2>Area: {country.area}</h2>
-                        <h2>Population: {country.population}</h2>
-                    </div>
+                <Contenedor>
+                    <GlassCard>
+                        <Flag src={country.image} alt={'image not found'}/>
+                        <Titulo>{country.name}</Titulo>
+                        <Texto>ID: {country.id}</Texto>
+                        <Texto>Capital: {country.capital}</Texto>
+                        <Texto>Subregion: {country.subregion}</Texto>
+                        <Texto>Continent: {country.continent}</Texto>
+                        <Texto>Area: {country.area}</Texto>
+                        <Texto>Population: {country.population}</Texto>
+                        <NavLink to={"/home"}><ButtonVolver>Volver</ButtonVolver></NavLink>
+                    </GlassCard>
                     <div>
                         {country.activities > 0 ? country.activities.map(a => (
                             <Activity key={a.name} a={a}/>
                         )) : null}
                     </div>
-                </div>
+                </Contenedor>
 
             ) : <p>Loading...</p>}
         </div>
